@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    final UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService ) {
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @PatchMapping("/users/{id}/edit")
-    public String update(@ModelAttribute("user") User user,
+    public String update(@ModelAttribute("user") UserForm user, // User user - UserForm user
                          @PathVariable("id") long id) {
         userService.updateUser(id, user);
         return "redirect:/users";
